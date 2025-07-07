@@ -4,7 +4,7 @@ export default function Footer() {
       <p className="px-4 leading-relaxed">
         © {new Date().getFullYear()}{" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-500 to-indigo-400 font-semibold">
-          Surjeet karan
+          Surjeet Karan
         </span>
         . Built with{" "}
         <a
@@ -33,6 +33,19 @@ export default function Footer() {
         >
           Tailwind CSS
         </a>
+        .
+      </p>
+      <p className="mt-2 px-4">
+        Code licensed under{" "}
+        <a
+          href="https://opensource.org/licenses/MIT"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white hover:underline"
+        >
+          MIT License
+        </a>
+        .
       </p>
     </footer>
   );
