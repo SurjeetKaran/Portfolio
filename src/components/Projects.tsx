@@ -5,7 +5,7 @@ const projects = [
     title: "Modern Portfolio",
     description:
       "A professional single-page portfolio with smooth Lenis scrolling, Framer Motion animations, and styled with Tailwind CSS.",
-    link: "https://github.com/Surjeet-karan/portfolio",
+    link: "https://portfolio-surjeet-karans-projects.vercel.app/",
     tech: ["React", "TypeScript", "Framer Motion", "Tailwind", "Lenis"]
   },
   {

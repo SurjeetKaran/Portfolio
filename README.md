@@ -1,6 +1,13 @@
-## 🚀 Surjeet Karan — Developer Portfolio
+# 🚀 Surjeet Karan — Developer Portfolio
 
-This is my personal portfolio built using **React**, **TypeScript**, and **Vite**, featuring beautiful animations, responsive layouts, and glassmorphic design. It showcases my projects, skills, services, and includes contact/social sections — built to impress recruiters and collaborators.
+This is my personal portfolio built using **React**, **TypeScript**, and **Vite**, featuring beautiful animations, responsive layouts, and glassmorphic design. It showcases my projects, skills, services, and includes contact/social sections.
+
+---
+
+### 🌐 Live Site
+
+This portfolio is deployed and live at:  
+🔗 [https://surjeetkarans-portfolio.vercel.app](https://surjeetkarans-portfolio.vercel.app)
 
 ---
 
@@ -19,16 +26,17 @@ This is my personal portfolio built using **React**, **TypeScript**, and **Vite*
 ### 📁 Folder Structure
 
 ```
+
 src/
 ├── components/       # Navbar, Footer, Sections (Hero, About, Projects, etc.)
 ├── assets/           # Static images and logos
 ├── App.tsx           # Main entry point with sections
-├── index.tsx         # ReactDOM render
-├── styles/ (optional)
+├── main.tsx          # React entry point
 public/
 ├── Learnify.svg      # Custom SVG icon
-├── preview.png       # Optional screenshot
-```
+├── preview\.png       # Optional screenshot
+
+````
 
 ---
 
@@ -39,17 +47,7 @@ git clone https://github.com/SurjeetKaran/portfolio.git
 cd portfolio
 npm install
 npm run dev
-```
-
----
-
-### 🚀 Deployment
-
-You can deploy this project using platforms like:
-
-* [Vercel](https://vercel.com/)
-* [Netlify](https://netlify.com/)
-* GitHub Pages (via `vite.config.ts` tweak)
+````
 
 ---
 
@@ -61,6 +59,16 @@ You can deploy this project using platforms like:
 * Contact section with social icons and email link
 * Sidebar with hover tooltips (desktop-only)
 * Fully customizable & accessible
+
+---
+
+### 🚀 Deployment
+
+You can deploy this project using platforms like:
+
+* [Vercel](https://vercel.com/)
+* [Netlify](https://netlify.com/)
+* GitHub Pages (via `vite.config.ts` tweak)
 
 ---
 
@@ -81,17 +89,17 @@ You can expand the rules using:
 
 ### 📧 Contact
 
-Want to collaborate, hire, or just connect?
+Feel free to connect:
 
-* [surjeetkaran777@gmail.com](mailto:surjeetkaran777@gmail.com)
-* [LinkedIn](https://www.linkedin.com/in/surjeet-karan)
-* [GitHub](https://github.com/SurjeetKaran)
-* [Live Portfolio](https://your-vercel-link.vercel.app/)
+* 📬 [surjeetkaran777@gmail.com](mailto:surjeetkaran777@gmail.com)
+* 💼 [LinkedIn](https://www.linkedin.com/in/surjeet-karan)
+* 💻 [GitHub](https://github.com/SurjeetKaran)
 
 ---
 
 ### 📝 License
 
-This project is open for learning and inspiration. Please **do not plagiarize** the design or personal content.
+This project is open for learning and inspiration.
+Please **do not plagiarize** the design or personal content.
 
 
