@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Code, MonitorSmartphone, Database, Laptop } from "lucide-react"; // Added Sparkles icon for AI tools
+import CanvasParticles from "./CanvasParticles";
 
 const services = [
   {
@@ -34,6 +35,8 @@ export default function Services() {
       id="services"
       className="relative w-full min-h-screen bg-black text-white py-24 px-6 flex flex-col items-center justify-center overflow-hidden"
     >
+       {/* 🌌 Canvas Particle Background */}
+              <CanvasParticles />
       {/* 💡 Glowing Backgrounds */}
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500 opacity-20 rounded-full blur-[160px] pointer-events-none z-0"

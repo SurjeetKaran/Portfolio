@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin } from "lucide-react";
+import CanvasParticles from "./CanvasParticles";
 
 export default function Contact() {
   return (
@@ -7,6 +8,8 @@ export default function Contact() {
       id="contact"
       className="relative w-full min-h-screen bg-black text-white px-6 py-24 flex items-center justify-center overflow-hidden"
     >
+       {/* 🌌 Canvas Particle Background */}
+              <CanvasParticles />
       {/* 🔮 Glowing Background */}
       <div
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"

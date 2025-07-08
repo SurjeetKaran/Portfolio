@@ -1,5 +1,6 @@
 // src/components/Skills.tsx
 import { motion } from "framer-motion";
+import CanvasParticles from "./CanvasParticles";
 import {
   SiReact,
   SiNodedotjs,
@@ -109,6 +110,8 @@ export default function Skills() {
       id="skills"
       className="relative w-full min-h-screen bg-black text-white py-24 px-6 flex flex-col items-center justify-center"
     >
+       {/* 🌌 Canvas Particle Background */}
+              <CanvasParticles />
       {/* 💡 Blue Bulb Glow Background */}
       <div
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"

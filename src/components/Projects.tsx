@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import CanvasParticles from "./CanvasParticles";
 
 const projects = [
   {
@@ -23,6 +24,8 @@ export default function Projects() {
       id="projects"
       className="relative min-h-screen w-full bg-black text-white px-6 py-24 flex flex-col items-center justify-center overflow-hidden"
     >
+       {/* 🌌 Canvas Particle Background */}
+              <CanvasParticles />
       {/* 🔵 Background Glow (matching About) */}
       <div
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"

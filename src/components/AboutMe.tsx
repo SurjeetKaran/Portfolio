@@ -1,4 +1,4 @@
-
+import CanvasParticles from "./CanvasParticles";
 import { motion } from "framer-motion";
 
 export default function AboutMe() {
@@ -7,6 +7,8 @@ export default function AboutMe() {
       id="about"
       className="relative w-full bg-black text-white py-24 px-6 flex flex-col items-center"
     >
+        {/* 🌌 Canvas Particle Background */}
+        <CanvasParticles />
       {/* 🔵 Background Glow (matching Hero) */}
       <div
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"

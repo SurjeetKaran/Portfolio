@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import type { HTMLMotionProps } from "framer-motion";
 import { useState, useEffect } from "react";
+import CanvasParticles from "./CanvasParticles"; // adjust path if needed
+
 
 const MotionDiv = (props: HTMLMotionProps<"div">) => <motion.div {...props} />;
 
@@ -41,6 +43,9 @@ export default function Hero() {
       id="hero"
       className="relative w-full min-h-screen bg-black text-white flex items-center justify-center px-6 overflow-x-hidden"
     >
+
+       {/* 🌌 Canvas Particle Background */}
+  <CanvasParticles />
       {/* 💡 Glowing Bulb Background (from Skills section) */}
       <div
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
