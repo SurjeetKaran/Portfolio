@@ -20,7 +20,7 @@ const projects = [
     title: "HealthyMe",
     description:
       "A full-stack health tracking app with Flutter frontend and Node.js/Express/MongoDB backend. Track activity, calories, goals, streaks, and more with a polished UI.",
-    link: "https://github.com/your-username/HealthyMe",
+    link: "https://github.com/SurjeetKaran/HealthyMe",
     tech: ["Flutter", "Dart", "Node.js", "Express", "MongoDB", "JWT"]
   },
   {
