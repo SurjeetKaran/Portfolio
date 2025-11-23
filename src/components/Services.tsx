@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, MonitorSmartphone, Database, Laptop } from "lucide-react"; // Added Sparkles icon for AI tools
+import { Code, MonitorSmartphone, Database, Laptop } from "lucide-react";
 import CanvasParticles from "./CanvasParticles";
 
 const services = [
@@ -7,25 +7,25 @@ const services = [
     icon: <Code size={28} />,
     title: "Full-Stack Development",
     description:
-      "I build end-to-end scalable web applications using the MERN stack (MongoDB, Express, React, Node.js). From frontend to backend, I ensure modular architecture, seamless data flow, and high performance.",
+      "I build end-to-end scalable applications using modern stacks like MERN (MongoDB, Express, React, Node.js) and Flutter for mobile apps. From designing RESTful APIs to crafting responsive frontends, I ensure modular architecture, seamless data flow, and high performance across platforms. I also follow best practices like clean code, reusable components, and version control.",
   },
   {
     icon: <MonitorSmartphone size={28} />,
-    title: "Responsive UI Design",
+    title: "Responsive UI & Mobile Development",
     description:
-      "I create elegant, mobile-first interfaces using Tailwind CSS and Framer Motion. Every design focuses on usability, accessibility, and engaging user experiences across all devices.",
+      "I design elegant, mobile-first interfaces using Flutter, React Native, Tailwind CSS, and Framer Motion. Every interface is optimized for performance, accessibility, and cross-device consistency. I emphasize smooth animations, intuitive navigation, and a user-centric experience for both mobile and web platforms.",
   },
   {
     icon: <Database size={28} />,
-    title: "Backend & APIs",
+    title: "Backend & API Development",
     description:
-      "I develop secure, RESTful APIs and backend systems using Node.js, Express, and MongoDB. I focus on clean architecture, optimized queries, authentication, and error handling.",
+      "I create secure, efficient, and scalable backend systems using Node.js, Express, and MongoDB. My focus includes authentication & authorization, data modeling, API versioning, error handling, and optimization of database queries. I ensure robust server-side logic that integrates seamlessly with frontend and mobile applications.",
   },
   {
     icon: <Laptop size={28} />,
-    title: "Software Development",
+    title: "Software & App Engineering",
     description:
-      "I design and develop robust, real-world software solutions with clean code practices. From planning to deployment, I follow modern software engineering principles and agile workflows.",
+      "I design and develop full-fledged software and apps, following modern engineering principles. From requirement analysis and prototyping to testing and deployment, I use agile workflows and CI/CD practices. My solutions prioritize reliability, maintainability, and user experience across web and mobile platforms.",
   },
 ];
 
@@ -35,8 +35,9 @@ export default function Services() {
       id="services"
       className="relative w-full min-h-screen bg-black text-white py-24 px-6 flex flex-col items-center justify-center overflow-hidden"
     >
-       {/* 🌌 Canvas Particle Background */}
-              <CanvasParticles />
+      {/* 🌌 Canvas Particle Background */}
+      <CanvasParticles />
+
       {/* 💡 Glowing Backgrounds */}
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500 opacity-20 rounded-full blur-[160px] pointer-events-none z-0"
