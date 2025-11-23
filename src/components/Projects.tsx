@@ -15,6 +15,20 @@ const projects = [
       "An AI-powered gamified learning platform that blends interactive quizzes, adaptive feedback, and engaging UI to make learning fun and efficient.",
     link: "https://learnify-frontend-surjeet-karans-projects.vercel.app/",
     tech: ["Next.js", "TypeScript", "GroqAI API", "MongoDB", "Tailwind"]
+  },
+  {
+    title: "HealthyMe",
+    description:
+      "A full-stack health tracking app with Flutter frontend and Node.js/Express/MongoDB backend. Track activity, calories, goals, streaks, and more with a polished UI.",
+    link: "https://github.com/your-username/HealthyMe",
+    tech: ["Flutter", "Dart", "Node.js", "Express", "MongoDB", "JWT"]
+  },
+  {
+    title: "AskNet",
+    description:
+      "RNN-powered Q&A model built with PyTorch, trained on a custom dataset to answer factual questions through a CLI interface.",
+    link: "https://github.com/SurjeetKaran/AskNet",
+    tech: ["Python", "PyTorch", "NLP", "RNN"]
   }
 ];
 
@@ -24,9 +38,10 @@ export default function Projects() {
       id="projects"
       className="relative min-h-screen w-full bg-black text-white px-6 py-24 flex flex-col items-center justify-center overflow-hidden"
     >
-       {/* 🌌 Canvas Particle Background */}
-              <CanvasParticles />
-      {/* 🔵 Background Glow (matching About) */}
+      {/* 🌌 Canvas Background */}
+      <CanvasParticles />
+
+      {/* 🔵 Glow Effect */}
       <div
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
         aria-hidden="true"
@@ -44,14 +59,14 @@ export default function Projects() {
         Projects
       </motion.h2>
 
-      {/* 📦 Project Cards */}
+      {/* 📦 Project Grid (2 per row) */}
       <div className="relative z-10 grid gap-6 md:grid-cols-2 max-w-5xl w-full">
         {projects.map((project, i) => (
           <motion.div
             key={project.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2 }}
+            transition={{ delay: i * 0.15 }}
             className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-6 text-left hover:border-blue-400/30 hover:shadow-blue-500/10 transition-all"
           >
             <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
@@ -71,4 +86,5 @@ export default function Projects() {
     </section>
   );
 }
+
 
