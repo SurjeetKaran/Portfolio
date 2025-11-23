@@ -9,9 +9,9 @@ const MotionDiv = (props: HTMLMotionProps<"div">) => <motion.div {...props} />;
 const roles = [
   "Full Stack Developer",
   "Frontend Developer",
-  "UI/UX Designer",
   "Backend Engineer",
   "Software Developer",
+  "Android Developer",
 ];
 
 export default function Hero() {
@@ -99,7 +99,8 @@ export default function Hero() {
           </a>
 
           <a
-            href="/resume.pdf"
+            href="/SurjeetKaran_resume.pdf"
+            download
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-xl text-white text-lg font-semibold bg-gradient-to-r from-blue-500 to-indigo-600 hover:opacity-90 transition duration-300"
