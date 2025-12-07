@@ -6,26 +6,32 @@ export default function CanvasParticles() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return; // ✅ Prevents null crash
+
     const ctx = canvas.getContext("2d");
+    if (!ctx) return; // ✅ Prevents null crash
+
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
     const mouse = { x: -9999, y: -9999 };
 
     const drawStar = (ctx, x, y, r, points = 5) => {
-      const step = Math.PI / points;
       ctx.beginPath();
+      const step = Math.PI / points;
       for (let i = 0; i < 2 * points; i++) {
         const angle = i * step;
         const radius = i % 2 === 0 ? r : r / 2;
-        ctx.lineTo(x + radius * Math.sin(angle), y - radius * Math.cos(angle));
+        ctx.lineTo(
+          x + radius * Math.sin(angle),
+          y - radius * Math.cos(angle)
+        );
       }
       ctx.closePath();
       ctx.fill();
     };
 
-    // Increased speed
-    const speedMultiplier = 2; // Change this to make it faster or slower
+    const speedMultiplier = 2;
 
     const particles = Array.from({ length: 100 }, () => ({
       x: Math.random() * width,
@@ -39,6 +45,7 @@ export default function CanvasParticles() {
       const gradient = ctx.createLinearGradient(0, 0, width, height);
       gradient.addColorStop(0, "#0b0f2b");
       gradient.addColorStop(1, "#05080f");
+
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
@@ -52,6 +59,7 @@ export default function CanvasParticles() {
         ctx.fillStyle = "rgba(59,130,246,0.8)";
         ctx.shadowBlur = 8;
         ctx.shadowColor = "#3b82f6";
+
         drawStar(ctx, p.x, p.y, p.radius, 5);
 
         const dx = mouse.x - p.x;
