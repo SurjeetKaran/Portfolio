@@ -194,4 +194,4 @@ export default function CanvasParticles() {
 //       className="absolute inset-0 z-0 w-full h-full pointer-events-auto"
 //     />
 //   );
-}
+//}
