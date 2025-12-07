@@ -2,61 +2,26 @@
 import { useRef, useEffect } from "react";
 
 export default function CanvasParticles() {
-  /** @type {import("react").MutableRefObject<HTMLCanvasElement | null>} */
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    /** @type {CanvasRenderingContext2D | null} */
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
+    const canvas = canvasRef.current!;
+    const ctx = canvas.getContext("2d")!;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
     const mouse = { x: -9999, y: -9999 };
 
-    /**
-     * @param {CanvasRenderingContext2D} ctx
-     * @param {number} x
-     * @param {number} y
-     * @param {number} r
-     * @param {number} points
-     */
-    const drawStar = (ctx, x, y, r, points = 5) => {
-      ctx.beginPath();
-      const step = Math.PI / points;
-      for (let i = 0; i < 2 * points; i++) {
-        const angle = i * step;
-        const radius = i % 2 === 0 ? r : r / 2;
-        ctx.lineTo(
-          x + radius * Math.sin(angle),
-          y - radius * Math.cos(angle)
-        );
-      }
-      ctx.closePath();
-      ctx.fill();
-    };
-
-    const speedMultiplier = 2;
-
-    const particles = Array.from({ length: 100 }, () => ({
+    const particles = Array.from({ length: 80 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.5 * speedMultiplier,
-      vy: (Math.random() - 0.5) * 0.5 * speedMultiplier,
+      vx: (Math.random() - 0.5) * 2.5,
+      vy: (Math.random() - 0.5) * 2.5,
       radius: Math.random() * 2 + 1,
     }));
 
     const animate = () => {
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "#0b0f2b");
-      gradient.addColorStop(1, "#05080f");
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
 
       for (let p of particles) {
         p.x += p.vx;
@@ -65,25 +30,22 @@ export default function CanvasParticles() {
         if (p.x <= 0 || p.x >= width) p.vx *= -1;
         if (p.y <= 0 || p.y >= height) p.vy *= -1;
 
-        ctx.fillStyle = "rgba(59,130,246,0.8)";
-        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.shadowBlur = 10;
         ctx.shadowColor = "#3b82f6";
+        ctx.fill();
 
-        drawStar(ctx, p.x, p.y, p.radius, 5);
-
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 150) {
-          const force = dist < 50 ? -0.5 : 0.05;
-          p.vx += (dx / dist) * force;
-          p.vy += (dy / dist) * force;
-
+        if (dist < 120) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(59,130,246,${1 - dist / 150})`;
+          ctx.strokeStyle = `rgba(59,130,246, ${1 - dist / 120})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -94,8 +56,7 @@ export default function CanvasParticles() {
 
     animate();
 
-    /** @param {MouseEvent} e */
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
@@ -118,7 +79,7 @@ export default function CanvasParticles() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none z-0"
+      className="absolute inset-0 z-0 w-full h-full pointer-events-auto"
     />
   );
 }
