@@ -2,20 +2,29 @@
 import { useRef, useEffect } from "react";
 
 export default function CanvasParticles() {
+  /** @type {import("react").MutableRefObject<HTMLCanvasElement | null>} */
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return; // ✅ Prevents null crash
+    if (!canvas) return;
 
+    /** @type {CanvasRenderingContext2D | null} */
     const ctx = canvas.getContext("2d");
-    if (!ctx) return; // ✅ Prevents null crash
+    if (!ctx) return;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
     const mouse = { x: -9999, y: -9999 };
 
+    /**
+     * @param {CanvasRenderingContext2D} ctx
+     * @param {number} x
+     * @param {number} y
+     * @param {number} r
+     * @param {number} points
+     */
     const drawStar = (ctx, x, y, r, points = 5) => {
       ctx.beginPath();
       const step = Math.PI / points;
@@ -85,6 +94,7 @@ export default function CanvasParticles() {
 
     animate();
 
+    /** @param {MouseEvent} e */
     const handleMouseMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
