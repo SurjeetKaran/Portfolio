@@ -44,11 +44,19 @@ const projects = [
 export default function Projects() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const scroll = (dir: "left" | "right") => {
+  // ✅ scroll exactly 1 card each click
+  const scrollOneCard = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
 
-    scrollRef.current.scrollBy({
-      left: dir === "left" ? -450 : 450,
+    const container = scrollRef.current;
+    const card = container.querySelector<HTMLDivElement>("[data-card='project']");
+    if (!card) return;
+
+    const cardWidth = card.offsetWidth;
+    const gap = 24; // gap-6 = 1.5rem = 24px
+
+    container.scrollBy({
+      left: dir === "left" ? -(cardWidth + gap) : cardWidth + gap,
       behavior: "smooth"
     });
   };
@@ -58,10 +66,10 @@ export default function Projects() {
       id="projects"
       className="relative min-h-screen w-full bg-black text-white px-6 py-24 flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* 🌌 Canvas Background */}
+      {/* 🌌 Background */}
       <CanvasParticles />
 
-      {/* 🔵 Glow Effect */}
+      {/* 🔵 Glow */}
       <div
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
         aria-hidden="true"
@@ -69,7 +77,7 @@ export default function Projects() {
         <div className="w-[600px] h-[600px] bg-[#3b82f6] rounded-full blur-[180px] opacity-25 animate-glow" />
       </div>
 
-      {/* ✨ Section Title */}
+      {/* ✨ Title */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -79,78 +87,83 @@ export default function Projects() {
         Projects
       </motion.h2>
 
-      {/* 📦 Horizontal Scroller */}
-      <div className="relative z-10 w-full max-w-6xl">
-        {/* ⬅ Left Arrow */}
+      {/* ✅ Carousel Wrapper */}
+      <div className="relative z-10 w-full max-w-6xl flex items-center gap-4">
+        
+        {/* ⬅ Left Arrow (outside cards) */}
         <button
-          onClick={() => scroll("left")}
+          onClick={() => scrollOneCard("left")}
           className="
-            absolute left-0 top-1/2 -translate-y-1/2 z-20
+            flex items-center justify-center shrink-0
+            w-12 h-12 rounded-full
             bg-black/40 hover:bg-black/60 border border-white/10
-            p-3 rounded-full backdrop-blur-md transition
+            backdrop-blur-md transition
           "
           aria-label="Scroll Left"
         >
           <ChevronLeft className="w-6 h-6 text-white" />
         </button>
 
-        {/* ➡ Right Arrow */}
+        {/* ✅ Scroll Area (arrows won't overlap now) */}
+        <div className="w-full overflow-hidden">
+          <div
+            ref={scrollRef}
+            className="
+              flex gap-6
+              overflow-x-scroll overflow-y-hidden
+              no-scrollbar
+              snap-x snap-mandatory scroll-smooth
+              py-2
+            "
+          >
+            {projects.map((project, i) => (
+              <motion.div
+                key={project.title}
+                data-card="project"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="
+                  min-w-[320px] sm:min-w-[380px] md:min-w-[420px]
+                  snap-start
+                  bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl
+                  p-6 text-left
+                  hover:border-blue-400/30 hover:shadow-blue-500/10 transition-all
+                "
+              >
+                <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
+                <p className="text-gray-300 mb-2">{project.description}</p>
+                <p className="text-sm text-gray-400 mb-4">
+                  {project.tech.join(" • ")}
+                </p>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  Explore →
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ➡ Right Arrow (outside cards) */}
         <button
-          onClick={() => scroll("right")}
+          onClick={() => scrollOneCard("right")}
           className="
-            absolute right-0 top-1/2 -translate-y-1/2 z-20
+            flex items-center justify-center shrink-0
+            w-12 h-12 rounded-full
             bg-black/40 hover:bg-black/60 border border-white/10
-            p-3 rounded-full backdrop-blur-md transition
+            backdrop-blur-md transition
           "
           aria-label="Scroll Right"
         >
           <ChevronRight className="w-6 h-6 text-white" />
         </button>
-
-        {/* Scroll Row (Scrollbars Hidden) */}
-        <div
-          ref={scrollRef}
-          className="
-            flex gap-6
-            overflow-x-scroll overflow-y-hidden
-            snap-x snap-mandatory scroll-smooth
-            no-scrollbar
-            px-14 py-2
-          "
-        >
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="
-                min-w-[320px] sm:min-w-[380px] md:min-w-[420px]
-                snap-center
-                bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl
-                p-6 text-left
-                hover:border-blue-400/30 hover:shadow-blue-500/10 transition-all
-              "
-            >
-              <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-gray-300 mb-2">{project.description}</p>
-              <p className="text-sm text-gray-400 mb-4">
-                {project.tech.join(" • ")}
-              </p>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:underline"
-              >
-                Explore →
-              </a>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
 }
-
 
