@@ -44,14 +44,11 @@ const projects = [
 export default function Projects() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const scroll = (direction: "left" | "right") => {
+  const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
 
-    const container = scrollRef.current;
-    const scrollAmount = 450; // change if you want more/less scroll
-
-    container.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
+    scrollRef.current.scrollBy({
+      left: dir === "left" ? -450 : 450,
       behavior: "smooth"
     });
   };
@@ -82,37 +79,43 @@ export default function Projects() {
         Projects
       </motion.h2>
 
-      {/* 📦 Horizontal Scroller with Arrows */}
+      {/* 📦 Horizontal Scroller */}
       <div className="relative z-10 w-full max-w-6xl">
-        {/* Left Arrow */}
+        {/* ⬅ Left Arrow */}
         <button
           onClick={() => scroll("left")}
-          className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-20
-                     bg-white/10 hover:bg-white/20 border border-white/10
-                     p-3 rounded-full backdrop-blur-md transition"
+          className="
+            absolute left-0 top-1/2 -translate-y-1/2 z-20
+            bg-black/40 hover:bg-black/60 border border-white/10
+            p-3 rounded-full backdrop-blur-md transition
+          "
           aria-label="Scroll Left"
         >
           <ChevronLeft className="w-6 h-6 text-white" />
         </button>
 
-        {/* Right Arrow */}
+        {/* ➡ Right Arrow */}
         <button
           onClick={() => scroll("right")}
-          className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-20
-                     bg-white/10 hover:bg-white/20 border border-white/10
-                     p-3 rounded-full backdrop-blur-md transition"
+          className="
+            absolute right-0 top-1/2 -translate-y-1/2 z-20
+            bg-black/40 hover:bg-black/60 border border-white/10
+            p-3 rounded-full backdrop-blur-md transition
+          "
           aria-label="Scroll Right"
         >
           <ChevronRight className="w-6 h-6 text-white" />
         </button>
 
-        {/* Scroll Container */}
+        {/* Scroll Row (Scrollbars Hidden) */}
         <div
           ref={scrollRef}
           className="
-            flex gap-6 overflow-x-auto pb-4 px-2
-            scroll-smooth snap-x snap-mandatory
-            scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
+            flex gap-6
+            overflow-x-scroll overflow-y-hidden
+            snap-x snap-mandatory scroll-smooth
+            no-scrollbar
+            px-14 py-2
           "
         >
           {projects.map((project, i) => (
@@ -134,7 +137,6 @@ export default function Projects() {
               <p className="text-sm text-gray-400 mb-4">
                 {project.tech.join(" • ")}
               </p>
-
               <a
                 href={project.link}
                 target="_blank"
