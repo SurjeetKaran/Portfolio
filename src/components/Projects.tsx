@@ -1,7 +1,16 @@
 import { motion } from "framer-motion";
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import CanvasParticles from "./CanvasParticles";
 
 const projects = [
+  {
+    title: "BMS – Bank Management System",
+    description:
+      "A full-stack banking web app with JWT-based role authentication (Admin/User), supporting account management, transfers, and transaction history via secure REST APIs.",
+    link: "https://github.com/SurjeetKaran/BMS",
+    tech: ["Spring Boot", "Spring Security", "JWT", "MySQL", "React", "TypeScript", "MUI"]
+  },
   {
     title: "Modern Portfolio",
     description:
@@ -33,6 +42,20 @@ const projects = [
 ];
 
 export default function Projects() {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+
+    const container = scrollRef.current;
+    const scrollAmount = 450; // change if you want more/less scroll
+
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth"
+    });
+  };
+
   return (
     <section
       id="projects"
@@ -59,29 +82,70 @@ export default function Projects() {
         Projects
       </motion.h2>
 
-      {/* 📦 Project Grid (2 per row) */}
-      <div className="relative z-10 grid gap-6 md:grid-cols-2 max-w-5xl w-full">
-        {projects.map((project, i) => (
-          <motion.div
-            key={project.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.15 }}
-            className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-6 text-left hover:border-blue-400/30 hover:shadow-blue-500/10 transition-all"
-          >
-            <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-gray-300 mb-2">{project.description}</p>
-            <p className="text-sm text-gray-400 mb-4">{project.tech.join(" • ")}</p>
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline"
+      {/* 📦 Horizontal Scroller with Arrows */}
+      <div className="relative z-10 w-full max-w-6xl">
+        {/* Left Arrow */}
+        <button
+          onClick={() => scroll("left")}
+          className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-20
+                     bg-white/10 hover:bg-white/20 border border-white/10
+                     p-3 rounded-full backdrop-blur-md transition"
+          aria-label="Scroll Left"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => scroll("right")}
+          className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-20
+                     bg-white/10 hover:bg-white/20 border border-white/10
+                     p-3 rounded-full backdrop-blur-md transition"
+          aria-label="Scroll Right"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
+
+        {/* Scroll Container */}
+        <div
+          ref={scrollRef}
+          className="
+            flex gap-6 overflow-x-auto pb-4 px-2
+            scroll-smooth snap-x snap-mandatory
+            scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
+          "
+        >
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="
+                min-w-[320px] sm:min-w-[380px] md:min-w-[420px]
+                snap-center
+                bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl
+                p-6 text-left
+                hover:border-blue-400/30 hover:shadow-blue-500/10 transition-all
+              "
             >
-              Explore →
-            </a>
-          </motion.div>
-        ))}
+              <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
+              <p className="text-gray-300 mb-2">{project.description}</p>
+              <p className="text-sm text-gray-400 mb-4">
+                {project.tech.join(" • ")}
+              </p>
+
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:underline"
+              >
+                Explore →
+              </a>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
