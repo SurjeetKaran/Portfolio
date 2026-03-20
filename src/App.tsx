@@ -7,12 +7,16 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SocialSidebar from "./components/SocialSidebar";
+import ChatBot from "./components/ChatBot";
 
 function App() {
   return (
     <main className="relative w-full min-h-screen bg-black text-white overflow-x-hidden">
       {/* Navbar */}
       <Navbar />
+
+      {/* Floating ChatBot */}
+      <ChatBot />
 
       {/* Social Sidebar (only visible on large screens) */}
       <SocialSidebar />
