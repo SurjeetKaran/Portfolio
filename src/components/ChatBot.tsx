@@ -1,12 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Send, X } from "lucide-react";
+import { MessageCircle, Send, X, AlertCircle } from "lucide-react";
 
 interface Message {
   id: string;
-  type: "user" | "bot";
+  type: "user" | "bot" | "error";
   text: string;
 }
+
+const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL || 
+  (() => {
+    throw new Error("VITE_N8N_WEBHOOK_URL environment variable is not set");
+  })();
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +24,7 @@ export default function ChatBot() {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to latest message
@@ -28,8 +34,10 @@ export default function ChatBot() {
     }
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim() === "") return;
+    
+    setError(null);
 
     // Add user message
     const userMessage: Message = {
@@ -42,53 +50,54 @@ export default function ChatBot() {
     setInputValue("");
     setIsLoading(true);
 
-    // Simulate bot thinking and response
-    setTimeout(() => {
+    try {
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: inputValue,
+        }),
+        signal: AbortSignal.timeout(30000), // 30s timeout
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      // Extract response text (handle both direct text and nested response)
+      const responseText = typeof data === "string" ? data : data.response || data.message || JSON.stringify(data);
+
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         type: "bot",
-        text: generateBotResponse(inputValue),
+        text: responseText,
       };
+
       setMessages((prev) => [...prev, botResponse]);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to connect to AI. Please try again.";
+      
+      // Show error in chat
+      const errorMsg: Message = {
+        id: (Date.now() + 1).toString(),
+        type: "error",
+        text: `⚠️ ${errorMessage}`,
+      };
+      
+      setMessages((prev) => [...prev, errorMsg]);
+      setError(errorMessage);
+      
+      // Log for debugging
+      console.error("[Chatbot Error]", err);
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
 
-  const generateBotResponse = (userInput: string): string => {
-    const input = userInput.toLowerCase();
-
-    // Portfolio-specific responses
-    if (
-      input.includes("project") ||
-      input.includes("portfolio") ||
-      input.includes("work")
-    ) {
-      return "I'd love to tell you about the projects! Check the Projects section to see HealthyMe, Learnify, BMS, and AskNet. Each one showcases different tech stacks and problem-solving skills.";
-    }
-    if (
-      input.includes("skill") ||
-      input.includes("technology") ||
-      input.includes("stack")
-    ) {
-      return "Surjeet is skilled in React, TypeScript, Flutter, Node.js, MongoDB, and more! He specializes in full-stack development, mobile apps, and responsive UI design.";
-    }
-    if (
-      input.includes("service") ||
-      input.includes("help with") ||
-      input.includes("develop")
-    ) {
-      return "Surjeet offers Full-Stack Development, Responsive UI/Mobile Development, Backend & API Development, and Software Engineering services. Perfect for scalable solutions!";
-    }
-    if (input.includes("contact") || input.includes("reach out")) {
-      return "You can reach Surjeet via email at surjeetKaran777@gmail.com, or connect on GitHub and LinkedIn. There's also a Contact section on the portfolio!";
-    }
-    if (input.includes("about") || input.includes("who")) {
-      return "Surjeet is a Full Stack & Mobile App Developer passionate about building impactful applications. He loves clean code, modern UI, and solving complex problems!";
-    }
-
-    // Default response
-    return "Great question! Feel free to ask me about Surjeet's projects, skills, services, or how to get in touch. I'm here to help! 😊";
-  };
 
   return (
     <>
@@ -138,7 +147,7 @@ export default function ChatBot() {
             {/* 🎨 Header */}
             <div className="bg-gradient-to-r from-blue-500 via-sky-500 to-indigo-600 px-6 py-4 rounded-t-2xl">
               <h3 className="text-white font-bold text-lg">AI Assistant</h3>
-              <p className="text-white/70 text-xs">Ask about Surjeet</p>
+              <p className="text-white/70 text-xs">Powered by Groq × n8n</p>
             </div>
 
             {/* 📨 Messages Container */}
@@ -160,9 +169,12 @@ export default function ChatBot() {
                     className={`max-w-xs px-4 py-3 rounded-lg ${
                       message.type === "user"
                         ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-br-none"
+                        : message.type === "error"
+                        ? "bg-red-500/20 border border-red-500/50 text-red-300 rounded-bl-none"
                         : "bg-white/10 backdrop-blur-sm border border-white/10 text-white/90 rounded-bl-none"
                     }`}
                   >
+                    {message.type === "error" && <AlertCircle className="inline w-4 h-4 mr-2" />}
                     <p className="text-sm leading-relaxed">{message.text}</p>
                   </div>
                 </motion.div>
@@ -212,16 +224,22 @@ export default function ChatBot() {
 
             {/* ⌨️ Input Section */}
             <div className="border-t border-white/10 p-4 bg-black/50 rounded-b-2xl">
+              {error && (
+                <div className="text-xs text-red-400 mb-2 animate-pulse">
+                  {error}
+                </div>
+              )}
               <div className="flex gap-2">
                 <input
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => {
-                    if (e.key === "Enter") handleSendMessage();
+                    if (e.key === "Enter" && !isLoading) handleSendMessage();
                   }}
                   placeholder="Ask something..."
-                  className="flex-1 bg-white/10 border border-white/10 rounded-lg px-4 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/30 transition duration-300"
+                  disabled={isLoading}
+                  className="flex-1 bg-white/10 border border-white/10 rounded-lg px-4 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/30 transition duration-300 disabled:opacity-50"
                 />
                 <motion.button
                   onClick={handleSendMessage}

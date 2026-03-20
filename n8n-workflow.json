@@ -1,0 +1,124 @@
+{
+  "name": "Portfolio Chatbot - Groq AI Integration",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "webhook/chat",
+        "authMethod": "none",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "chat"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "message",
+              "value": "={{ $json.body.message }}"
+            },
+            {
+              "name": "about",
+              "value": "= \"Surjeet is a Full Stack Developer with expertise in React, TypeScript, Node.js, and mobile development. His portfolio showcases modern UI, responsive design, and scalable backend solutions.\""
+            },
+            {
+              "name": "skills",
+              "value": "= \"React, TypeScript, JavaScript, Node.js, Express, MongoDB, PostgreSQL, Flutter, Tailwind CSS, Framer Motion, Next.js\""
+            },
+            {
+              "name": "projects",
+              "value": "= \"HealthyMe (health tracking), Learnify (learning platform), BMS (management system), AskNet (Q&A platform)\""
+            },
+            {
+              "name": "services",
+              "value": "= \"Full-Stack Development, Responsive Web Design, Mobile App Development, API Development, UI/UX Implementation\""
+            }
+          ]
+        }
+      },
+      "id": "edit-fields",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuth": {
+          "authenticationType": "httpHeaderAuth",
+          "httpHeaderAuth": {
+            "name": "Authorization",
+            "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParametersJson": "={
+  \"model\": \"llama-3.3-70b-versatile\",
+  \"messages\": [
+    {
+      \"role\": \"system\",
+      \"content\": \"You are Surjeet's AI portfolio assistant. You have knowledge about his skills, projects, services, and can answer questions about his portfolio. Be professional, friendly, and concise. Context:\\nAbout: {{ $json.about }}\\nSkills: {{ $json.skills }}\\nProjects: {{ $json.projects }}\\nServices: {{ $json.services }}\"
+    },
+    {
+      \"role\": \"user\",
+      \"content\": \"{{ $json.message }}\"
+    }
+  ],
+  \"max_tokens\": 500,
+  \"temperature\": 0.7
+}"
+      },
+      "id": "groq-api-call",
+      "name": "Groq API Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [750, 300]
+    },
+    {
+      "parameters": {
+        "responseCode": 200,
+        "responseData": "={{ { response: $json.choices[0].message.content } }}"
+      },
+      "id": "respond-to-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.0,
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {
+    "webhook-trigger": {
+      "main": [[{ "node": "edit-fields", "branch": 0, "index": 0 }]]
+    },
+    "edit-fields": {
+      "main": [[{ "node": "groq-api-call", "branch": 0, "index": 0 }]]
+    },
+    "groq-api-call": {
+      "main": [[{ "node": "respond-to-webhook", "branch": 0, "index": 0 }]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "any"
+  }
+}

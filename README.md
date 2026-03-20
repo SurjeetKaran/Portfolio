@@ -1,99 +1,300 @@
-# 🚀 Surjeet Karan — Developer Portfolio
+# 🚀 Surjeet Karan — Developer Portfolio + AI Chatbot
 
-This is my personal portfolio built using **React**, **TypeScript**, and **Vite**, featuring beautiful animations, responsive layouts, and glassmorphic design. It showcases my projects, skills, services, and includes contact/social sections.
+A modern developer portfolio built with **React**, **TypeScript**, and **Vite**, featuring beautiful animations, responsive layouts, and **AI-powered chatbot**. The chatbot uses **Groq LLaMA 3.3 70B** for intelligent responses about skills, projects, and services.
 
 ---
 
 ### 🌐 Live Site
 
-This portfolio is deployed and live at:  
-🔗 [https://surjeetkarans-portfolio.vercel.app](https://surjeetkarans-portfolio.vercel.app)
+📱 **Portfolio:** https://surjeetkarans-portfolio.vercel.app  
+🤖 **AI Backend:** https://portfolio-ai-backend-dqw5.onrender.com
+
+---
+
+### ✨ Key Features
+
+* ✅ **AI Chatbot** - Floating chat with Groq AI integration (bottom-right)
+* ✅ **Real-time Responses** - Powered by Groq LLaMA 3.3 70B model
+* ✅ **n8n Workflow** - Automated webhook processing
+* ✅ **Animated Sections** - Glassmorphic UI with Framer Motion
+* ✅ **Responsive Design** - Mobile-first, works on all devices
+* ✅ **Dark Theme** - Professional dark mode throughout
+* ✅ **Production Ready** - Full error handling & security
 
 ---
 
 ### 🛠️ Tech Stack
 
-* ⚛️ **React** (with TypeScript)
-* ⚡ **Vite** for fast bundling and HMR
+**Frontend:**
+* ⚛️ **React** 18 (with TypeScript)
+* ⚡ **Vite** for fast HMR & bundling
 * 🎨 **Tailwind CSS** for styling
-* 🎞️ **Framer Motion** for animations
-* 🌐 **Lucide / React Icons** for iconography
-* 💌 Responsive design & accessibility friendly
-* 🌟 Glassmorphic UI, hover tooltips, and section highlights
+* 🎞️ **Framer Motion** for smooth animations
+* 🌐 **Lucide Icons** for iconography
+* 🔧 **ESLint** for code quality
+
+**Backend:**
+* 🔗 **n8n** - Workflow automation (Docker on Render)
+* 🤖 **Groq API** - LLaMA 3.3 70B AI model
+* 📡 **Webhooks** - Real-time request processing
+
+**Deployment:**
+* 🌍 **Vercel** - Frontend (CDN + serverless)
+* 🐳 **Render** - Backend n8n (containerized)
+* 📦 **PostgreSQL** - n8n database
 
 ---
 
-### 📁 Folder Structure
+### 📁 Project Structure
 
 ```
-
-src/
-├── components/       # Navbar, Footer, Sections (Hero, About, Projects, etc.)
-├── assets/           # Static images and logos
-├── App.tsx           # Main entry point with sections
-├── main.tsx          # React entry point
-public/
-├── Learnify.svg      # Custom SVG icon
-├── preview\.png       # Optional screenshot
-
-````
+Portfolio/
+├── src/
+│   ├── components/
+│   │   ├── ChatBot.tsx          # 🤖 AI Chatbot UI
+│   │   ├── Hero.tsx             # Landing section
+│   │   ├── About.tsx            # About section
+│   │   ├── Skills.tsx           # Skills showcase
+│   │   ├── Projects.tsx         # Portfolio projects
+│   │   ├── Services.tsx         # Services offered
+│   │   ├── Contact.tsx          # Contact section
+│   │   └── [Other components]
+│   ├── App.tsx                  # Main app
+│   ├── main.tsx                 # Entry point
+│   └── index.css                # Global styles
+├── public/                       # Static assets
+├── .env.local                    # Dev environment (Render backend)
+├── .env.production               # Prod environment (Render backend)
+├── n8n-workflow.json             # 🔗 n8n workflow (Groq integration)
+├── Dockerfile                    # n8n Docker config
+├── package.json
+├── vite.config.ts
+├── tailwind.config.js
+├── tsconfig.json
+└── README.md
+```
 
 ---
 
-### 📦 Getting Started
+### 🤖 AI Chatbot Architecture
+
+```
+User Chat Input (Vercel)
+    ↓
+POST /webhook/chat (to Render)
+    ↓
+n8n Webhook + Edit Fields (inject portfolio context)
+    ↓
+Groq API: llama-3.3-70b-versatile
+    ↓
+Extract & Return JSON Response
+    ↓
+Display in Chat Bubble ✨
+```
+
+**Key Features:**
+- ✅ Real AI responses (not hardcoded)
+- ✅ Context-aware answers about skills/projects
+- ✅ Timeout protection (30 seconds)
+- ✅ Error handling with user messages
+- ✅ Loading animation while waiting
+- ✅ Mobile responsive
+
+---
+
+### 📱 Getting Started
+
+#### Local Development
 
 ```bash
+# Clone repository
 git clone https://github.com/SurjeetKaran/portfolio.git
 cd portfolio
+
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
-````
+```
+
+Frontend runs on: http://localhost:5173
+
+#### AI Chatbot Setup (Optional for Local Testing)
+
+To test the chatbot locally, you need n8n running:
+
+```bash
+# Start n8n with Docker
+docker run -it --rm \
+  -p 5678:5678 \
+  -e N8N_ENCRYPTION_KEY=dev_key \
+  -e GROQ_API_KEY=your_groq_api_key \
+  n8nio/n8n
+```
+
+Then:
+1. Open http://localhost:5678 in browser
+2. Import `n8n-workflow.json` workflow
+3. Set `GROQ_API_KEY` in n8n environment
+4. Activate workflow
+5. Frontend chatbot will work on localhost ✅
+
+**Get Groq API Key:** https://console.groq.com (free tier available)
 
 ---
 
 ### ✅ Features
 
-* Animated navbar with active section highlighting
-* Glowing buttons and gradient texts
-* Responsive on all devices (mobile-first)
-* Contact section with social icons and email link
-* Sidebar with hover tooltips (desktop-only)
-* Fully customizable & accessible
+* 🤖 **AI Chatbot** - Real-time responses via Groq
+* ✨ **Animated Sections** - Smooth transitions & effects
+* 🎨 **Glassmorphic Design** - Modern dark theme
+* 📱 **Fully Responsive** - Works on all devices
+* ⚡ **Fast Performance** - Vite + CDN optimized
+* 🔐 **Secure** - API keys protected, error handling
+* ♿ **Accessible** - ARIA labels & keyboard navigation
 
 ---
 
-### 🚀 Deployment
+### 🚀 Build & Deployment
 
-You can deploy this project using platforms like:
+#### Build for Production
 
-* [Vercel](https://vercel.com/)
-* [Netlify](https://netlify.com/)
-* GitHub Pages (via `vite.config.ts` tweak)
+```bash
+# Build frontend
+npm run build
+
+# Output in dist/ folder
+```
+
+#### Frontend (Vercel)
+
+1. Connect GitHub repo to Vercel
+2. Set environment variable in Vercel dashboard:
+   ```
+   VITE_N8N_WEBHOOK_URL=https://portfolio-ai-backend-dqw5.onrender.com/webhook/chat
+   ```
+3. Deploy - Vercel auto-deploys on push
+
+**Live:** https://surjeetkarans-portfolio.vercel.app
+
+#### Backend (n8n on Render)
+
+1. Deploy n8n Docker image to Render
+2. Add environment variables:
+   ```
+   N8N_HOST=0.0.0.0
+   N8N_PORT=5678
+   N8N_PROTOCOL=https
+   GROQ_API_KEY=<your_groq_api_key>
+   N8N_ENCRYPTION_KEY=<random_32_char_key>
+   WEBHOOK_URL=https://portfolio-ai-backend-dqw5.onrender.com
+   ```
+3. Connect PostgreSQL database
+4. Import `n8n-workflow.json` workflow
+5. Activate workflow
+
+**Backend:** https://portfolio-ai-backend-dqw5.onrender.com
 
 ---
 
-### 🧹 Linting & Code Quality
+### 🔑 Environment Variables
 
-This project supports ESLint with React & TypeScript rules:
+**Frontend (.env.local for dev, .env.production for prod):**
+```env
+# Point to your n8n webhook
+VITE_N8N_WEBHOOK_URL=https://portfolio-ai-backend-dqw5.onrender.com/webhook/chat
+```
+
+**Backend (n8n environment variables on Render):**
+- `GROQ_API_KEY` - Get from https://console.groq.com
+- `N8N_ENCRYPTION_KEY` - Strong random 32+ character key
+- `N8N_HOST` - 0.0.0.0
+- `N8N_PORT` - 5678
+- `N8N_PROTOCOL` - https
+- `DATABASE_URL` - Auto-set by Render PostgreSQL addon
+
+---
+
+---
+
+### 🌐 Alternative Deployment Options
+
+* **Frontend:** Netlify, GitHub Pages, AWS Amplify
+* **Backend:** Railway, Fly.io, AWS EC2 (with Docker)
+* **Database:** Supabase, Planetscale, AWS RDS
+
+---
+
+### 🧪 Available Scripts
+
+```bash
+npm run dev              # Start dev server (localhost:5173)
+npm run build            # Build for production
+npm run preview          # Preview production build
+npm run lint             # Run ESLint
+```
+
+---
+
+### 🔧 Tech Details
+
+**Chatbot Integration:**
+- Frontend sends POST to `/webhook/chat` endpoint
+- n8n workflow processes request with portfolio context
+- Groq API generates response using LLaMA 3.3 70B
+- Response returned as JSON: `{ "response": "text" }`
+- JavaScript parses and displays in chat
+
+**Response Format:**
+```json
+{
+  "response": "AI-generated answer about skills/projects..."
+}
+```
+
+**Error Handling:**
+- Timeout: 30 seconds max
+- Network errors: User-friendly message
+- Missing env var: Throws error (prevents silent failure)
+- API failures: Graceful error display
+
+---
+
+### 📚 Documentation
+
+For detailed setup, troubleshooting, and architecture diagrams, see:
+- `PROJECT_DETAILS.md` - Complete project overview
+- `N8N_SETUP_GUIDE.md` - n8n deployment guide
+- `DEPLOYMENT_CHECKLIST.md` - Step-by-step checklist
+
+---
+
+### 🧹 Code Quality
 
 ```bash
 npm run lint
 ```
 
-You can expand the rules using:
-
-* [`eslint-plugin-react-x`](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x)
-* [`eslint-plugin-react-dom`](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)
+This project uses ESLint with React & TypeScript best practices
 
 ---
 
-### 📧 Contact
+### � Chat with Me!
 
-Feel free to connect:
+The AI chatbot is available on the live portfolio. Ask it about:
+- 🚀 My projects and experience
+- 💻 Technologies and skills
+- 📧 How to contact me
+- 🎯 Services I offer
 
-* 📬 [surjeetkaran777@gmail.com](mailto:surjeetkaran777@gmail.com)
-* 💼 [LinkedIn](https://www.linkedin.com/in/surjeet-karan)
-* 💻 [GitHub](https://github.com/SurjeetKaran)
+---
+
+### 📧 Direct Contact
+
+* 📬 **Email:** [surjeetkaran777@gmail.com](mailto:surjeetkaran777@gmail.com)
+* 💼 **LinkedIn:** [/in/surjeet-karan](https://www.linkedin.com/in/surjeet-karan)
+* 💻 **GitHub:** [@SurjeetKaran](https://github.com/SurjeetKaran)
 
 ---
 
