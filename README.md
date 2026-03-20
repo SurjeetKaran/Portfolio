@@ -7,15 +7,19 @@ A modern developer portfolio built with **React**, **TypeScript**, and **Vite**,
 ### 🌐 Live Site
 
 📱 **Portfolio:** https://surjeetkarans-portfolio.vercel.app  
-🤖 **AI Backend:** https://portfolio-ai-backend-dqw5.onrender.com
+🤖 **AI Backend:** https://portfolio-ai-backend-dqw5.onrender.com (⚠️ Temporarily Down)
+
+---
+
+### ⚠️ Maintenance Notice
+
+The AI chatbot feature is **temporarily disabled** for backend maintenance. The n8n workflow will be restored once the server is back online. All portfolio sections (Hero, About, Skills, Projects, Services, Contact) are fully functional.
 
 ---
 
 ### ✨ Key Features
 
-* ✅ **AI Chatbot** - Floating chat with Groq AI integration (bottom-right)
-* ✅ **Real-time Responses** - Powered by Groq LLaMA 3.3 70B model
-* ✅ **n8n Workflow** - Automated webhook processing
+* ⚠️ **AI Chatbot** - Currently under maintenance (temporarily disabled)
 * ✅ **Animated Sections** - Glassmorphic UI with Framer Motion
 * ✅ **Responsive Design** - Mobile-first, works on all devices
 * ✅ **Dark Theme** - Professional dark mode throughout
@@ -120,27 +124,11 @@ npm run dev
 
 Frontend runs on: http://localhost:5173
 
-#### AI Chatbot Setup (Optional for Local Testing)
+#### AI Chatbot (Currently Disabled)
 
-To test the chatbot locally, you need n8n running:
+The AI chatbot feature is temporarily disabled while n8n server undergoes maintenance. Once restored, the chatbot will be available on the live portfolio at https://surjeetkarans-portfolio.vercel.app
 
-```bash
-# Start n8n with Docker
-docker run -it --rm \
-  -p 5678:5678 \
-  -e N8N_ENCRYPTION_KEY=dev_key \
-  -e GROQ_API_KEY=your_groq_api_key \
-  n8nio/n8n
-```
-
-Then:
-1. Open http://localhost:5678 in browser
-2. Import `n8n-workflow.json` workflow
-3. Set `GROQ_API_KEY` in n8n environment
-4. Activate workflow
-5. Frontend chatbot will work on localhost ✅
-
-**Get Groq API Key:** https://console.groq.com (free tier available)
+**Get Groq API Key:** https://console.groq.com (for future setup)
 
 ---
 

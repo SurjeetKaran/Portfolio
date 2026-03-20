@@ -14,18 +14,9 @@ const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL ||
   })();
 
 export default function ChatBot() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      type: "bot",
-      text: "Hi! I'm Surjeet's AI Assistant. Ask me anything about the portfolio, skills, or projects! 🚀",
-    },
-  ]);
-  const [inputValue, setInputValue] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  // ⚠️ AI Backend temporarily down for maintenance
+  // Chatbot will be re-enabled once n8n server is back online
+  return null;
 
   // Auto-scroll to latest message
   useEffect(() => {
