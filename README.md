@@ -6,8 +6,7 @@ A modern developer portfolio built with **React**, **TypeScript**, and **Vite**,
 
 ### 🌐 Live Site
 
-📱 **Portfolio:** https://surjeetkarans-portfolio.vercel.app  
-🤖 **AI Backend:** https://portfolio-ai-backend-dqw5.onrender.com (⚠️ Temporarily Down)
+📱 **Portfolio:** https://surjeetkaran.onrender.com 
 
 ---
 
@@ -43,10 +42,7 @@ The AI chatbot feature is **temporarily disabled** for backend maintenance. The 
 * 📡 **Webhooks** - Real-time request processing
 
 **Deployment:**
-* 🌍 **Vercel** - Frontend (CDN + serverless)
-* 🐳 **Render** - Backend n8n (containerized)
-* 📦 **PostgreSQL** - n8n database
-
+* 🌍 **Render** - Frontend
 ---
 
 ### 📁 Project Structure
@@ -162,9 +158,9 @@ npm run build
    ```
    VITE_N8N_WEBHOOK_URL=https://portfolio-ai-backend-dqw5.onrender.com/webhook/chat
    ```
-3. Deploy - Vercel auto-deploys on push
+3. Deploy - Render auto-deploys on push
 
-**Live:** https://surjeetkarans-portfolio.vercel.app
+**Live:** https://surjeetkaran.onrender.com
 
 #### Backend (n8n on Render)
 
