@@ -23,16 +23,16 @@ const socials = [
  {
   icon: (
     <img
-      src="/Learnify.svg"
-      alt="Learnify"
-      width={25}
-      height={25}
-      className="rounded-md group-hover:shadow-[0_0_12px_#3b82f6] transition duration-300"
+      src="/NexusOne.svg"
+      alt="NexusOne"
+      width={30}
+      height={30}
+      className="rounded-md shadow-[0_0_10px_#7c3aed,0_0_20px_#3b82f6] group-hover:shadow-[0_0_18px_#7c3aed,0_0_36px_#3b82f6] transition duration-300"
     />
   ),
-  href: "https://learnify-frontend-surjeet-karans-projects.vercel.app/",
-  label: "Learnify",
-  desc: "My Ai-Powered learning System",
+  href: "https://nexusone-zraq.onrender.com",
+  label: "NexusOne",
+  desc: "Multi-Model AI Workspace",
 }
 ];
 

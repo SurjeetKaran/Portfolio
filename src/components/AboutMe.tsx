@@ -74,7 +74,7 @@ export default function AboutMe() {
             transition={{ delay: 0.25, duration: 0.6 }}
             className="text-base md:text-lg text-gray-300 leading-relaxed mt-4"
           >
-            I recently built <span className="text-white font-medium">HealthyMe</span> — a full-stack health tracker app, and <span className="text-white font-medium">Learnify</span> — an AI-powered gamified learning platform. These projects reflect my ability to independently design, develop, and deploy full-scale applications.
+            I recently built <span className="text-white font-medium">HealthyMe</span> — a full-stack health tracker app, and <span className="text-white font-medium">NexusOne</span> — a full-stack multi-model AI workspace where one prompt gets responses from multiple AI personalities side by side. These projects reflect my ability to independently design, develop, and deploy full-scale applications.
           </motion.p>
 
           {/* 🤝 Call to Action */}

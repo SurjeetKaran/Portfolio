@@ -5,6 +5,13 @@ import CanvasParticles from "./CanvasParticles";
 
 const projects = [
   {
+    title: "NexusOne",
+    description:
+      "A full-stack multi-model AI workspace — send one prompt and receive responses from multiple AI personalities simultaneously, side by side. Features SmartMix routing, conversation modes, plan-based limits, and an admin console.",
+    link: "https://nexusone-zraq.onrender.com",
+    tech: ["React", "Node.js", "Express", "MongoDB", "Groq API", "Tailwind", "Zustand"]
+  },
+  {
     title: "BMS – Bank Management System",
     description:
       "A full-stack banking web app with JWT-based role authentication (Admin/User), supporting account management, transfers, and transaction history via secure REST APIs.",
@@ -15,15 +22,8 @@ const projects = [
     title: "Modern Portfolio",
     description:
       "A professional single-page portfolio with smooth Lenis scrolling, Framer Motion animations, and styled with Tailwind CSS.",
-    link: "https://portfolio-surjeet-karans-projects.vercel.app/",
+    link: "https://surjeetkaran.onrender.com/",
     tech: ["React", "TypeScript", "Framer Motion", "Tailwind", "Lenis"]
-  },
-  {
-    title: "Learnify",
-    description:
-      "An AI-powered gamified learning platform that blends interactive quizzes, adaptive feedback, and engaging UI to make learning fun and efficient.",
-    link: "https://learnify-frontend-surjeet-karans-projects.vercel.app/",
-    tech: ["Next.js", "TypeScript", "GroqAI API", "MongoDB", "Tailwind"]
   },
   {
     title: "HealthyMe",
