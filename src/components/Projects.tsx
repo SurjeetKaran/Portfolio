@@ -12,6 +12,24 @@ const projects = [
     tech: ["React", "Node.js", "Express", "MongoDB", "Groq API", "Tailwind", "Zustand"]
   },
   {
+  title: "PDFKit",
+  description:
+    "A production-ready PDF utility platform with 23+ tools for PDF manipulation, conversion, security, metadata inspection, and HTML-to-PDF generation. Built with a microservices architecture, Kubernetes auto-scaling, Redis queues, and temporary file storage with automatic cleanup.",
+  link: "https://github.com/your-repo/pdfkit", // replace with your actual URL
+  tech: [
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "Docker",
+    "Kubernetes",
+    "Redis",
+    "MySQL",
+    "MinIO",
+    "pdf-lib"
+  ]
+},
+  {
     title: "BMS – Bank Management System",
     description:
       "A full-stack banking web app with JWT-based role authentication (Admin/User), supporting account management, transfers, and transaction history via secure REST APIs.",
