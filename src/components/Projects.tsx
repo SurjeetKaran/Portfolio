@@ -14,8 +14,8 @@ const projects = [
   {
   title: "PDFKit",
   description:
-    "A production-ready PDF utility platform with 23+ tools for PDF manipulation, conversion, security, metadata inspection, and HTML-to-PDF generation. Built with a microservices architecture, Kubernetes auto-scaling, Redis queues, and temporary file storage with automatic cleanup.",
-  link: "https://github.com/your-repo/pdfkit", // replace with your actual URL
+    "A production-ready PDF utility platform with 20+ tools for PDF manipulation, conversion, security, metadata inspection, and HTML-to-PDF generation. Built with a microservices architecture, Kubernetes auto-scaling, Redis queues, and temporary file storage with automatic cleanup.",
+  link: "https://github.com/SurjeetKaran/PDFkit",
   tech: [
     "Next.js",
     "TypeScript",
